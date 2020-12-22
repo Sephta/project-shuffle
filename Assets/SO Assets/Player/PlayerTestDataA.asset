@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 100
   colliderRadius: 0.35
+  colliderPos: {x: -0.03, y: 0.05}
   colliderPosX: -0.03
   colliderPosY: 0.05

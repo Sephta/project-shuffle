@@ -12,8 +12,7 @@ public class PlayerData : ScriptableObject
     /* --------------------------------------- */
     [SerializeField] private float moveSpeed = 0f;
     [SerializeField, Range(0f, 1f)] private float colliderRadius = 0f;
-    [SerializeField, Range(-1f, 1f)] private float colliderPosX = 0f;
-    [SerializeField, Range(-1f, 1f)] private float colliderPosY = 0f;
+    [SerializeField] private Vector2 colliderPos = Vector2.zero;
 #endregion
 
 
@@ -23,7 +22,6 @@ public class PlayerData : ScriptableObject
     /* --------------------------------------- */
     public float MoveSpeed { get { return moveSpeed; } }
     public float ColliderRadius { get { return colliderRadius; } }
-    public float ColliderPosX { get { return colliderPosX; } }
-    public float ColliderPosY { get { return colliderPosY; } }
+    public Vector2 ColliderPosition { get { return colliderPos; } }
 #endregion
 }

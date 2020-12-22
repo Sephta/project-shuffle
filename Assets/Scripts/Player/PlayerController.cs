@@ -114,7 +114,6 @@ public class PlayerController : MonoBehaviour
     {
         if (changeColliderData)
             UpdateColliderData();
-
     }
 
     private void UpdateColliderData()
@@ -124,7 +123,7 @@ public class PlayerController : MonoBehaviour
         
         CircleCollider2D col = _col as CircleCollider2D;
 
-        Vector2 newColOffset = new Vector2(pData.ColliderPosX, pData.ColliderPosY);
+        Vector2 newColOffset = new Vector2(pData.ColliderPosition.x, pData.ColliderPosition.y);
 
         col.radius = pData.ColliderRadius;
         col.offset = newColOffset;
