@@ -12,4 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83956b6c2a723454883b7404d6e883d4, type: 3}
   m_Name: ProjectileTestA
   m_EditorClassIdentifier: 
+  projSprite: {fileID: -3735707067017051549, guid: 3b05625fa4ca665418233bbc5216c5dd,
+    type: 3}
   speed: 5
+  projDamage: 50
+  projLifetime: 3
