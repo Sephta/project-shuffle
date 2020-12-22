@@ -412,6 +412,12 @@ PrefabInstance:
       propertyPath: _cam
       value: 
       objectReference: {fileID: 954471097}
+    - target: {fileID: 536875922912018617, guid: 1b1af3460d2f2f746b59bacc9264c816,
+        type: 3}
+      propertyPath: pData
+      value: 
+      objectReference: {fileID: 11400000, guid: d497a0d6a29ba6341bf4349d7b771a4b,
+        type: 2}
     - target: {fileID: 536875922912018620, guid: 1b1af3460d2f2f746b59bacc9264c816,
         type: 3}
       propertyPath: m_Name
@@ -535,6 +541,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8623063710367989421, guid: 9f9cc753411accc458829f7b562a823e,
+        type: 3}
+      propertyPath: _keyBindings_test.Array.size
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8623063710367989421, guid: 9f9cc753411accc458829f7b562a823e,
+        type: 3}
+      propertyPath: _keyBindings_test.Array.data[7].key
+      value: 101
+      objectReference: {fileID: 0}
+    - target: {fileID: 8623063710367989421, guid: 9f9cc753411accc458829f7b562a823e,
+        type: 3}
+      propertyPath: _keyBindings_test.Array.data[8].key
+      value: 101
+      objectReference: {fileID: 0}
+    - target: {fileID: 8623063710367989421, guid: 9f9cc753411accc458829f7b562a823e,
+        type: 3}
+      propertyPath: _keyBindings_test.Array.data[7].action
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8623063710367989421, guid: 9f9cc753411accc458829f7b562a823e,
+        type: 3}
+      propertyPath: _keyBindings_test.Array.data[8].action
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8623063710367989422, guid: 9f9cc753411accc458829f7b562a823e,
         type: 3}
