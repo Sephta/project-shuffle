@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Lean.Pool;
 using NaughtyAttributes;
 
 
@@ -11,15 +12,21 @@ public class PlayerController : MonoBehaviour
     public Rigidbody2D _rb = null;
     public Collider2D _col = null;
     public Animator _anim = null;
+    public GameObject _proj = null;
+    public Transform _projSpawnLocation = null;
 
     [Header("Configurable Data")]
     public PlayerData pData = null;
+    public HandSO pHand = null;
 
     [Header("Debug Data")]
     
     [Tooltip("Will allow collider data to be changed at runtime.")]
     public bool changeColliderData = false;
     [SerializeField, ReadOnly] public Vector2 direction = Vector2.zero;
+    [SerializeField] public float attackDownTime = 0.5f;
+    [SerializeField, ReadOnly] private float downTime = 0f;
+    [SerializeField, ReadOnly] private float timeSinceLastAttack = 0f;
 
 
 #region Unity Functions
@@ -44,6 +51,8 @@ public class PlayerController : MonoBehaviour
     {
         CheckDebugFlags();
         CheckPlayerActions();
+
+        downTime = (Time.time - timeSinceLastAttack);
     }
 
     void FixedUpdate()
@@ -59,7 +68,11 @@ public class PlayerController : MonoBehaviour
 
     public void FireProjectile()
     {
-        
+        if ((Time.time - timeSinceLastAttack) >= attackDownTime)
+        {
+            timeSinceLastAttack = Time.time;
+            LeanPool.Spawn(_proj, _projSpawnLocation.position, _projSpawnLocation.rotation, null);
+        }
     }
 
 

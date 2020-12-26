@@ -218,9 +218,15 @@ MonoBehaviour:
   _rb: {fileID: 0}
   _col: {fileID: 0}
   _anim: {fileID: 0}
-  pData: {fileID: 11400000, guid: d497a0d6a29ba6341bf4349d7b771a4b, type: 2}
+  _proj: {fileID: 1329111819759016298, guid: c112392f8f5c5da439f674efb004482f, type: 3}
+  _projSpawnLocation: {fileID: 536875922201866005}
+  pData: {fileID: 0}
+  pHand: {fileID: 0}
   changeColliderData: 0
   direction: {x: 0, y: 0}
+  attackDownTime: 0.5
+  downTime: 0
+  timeSinceLastAttack: 0
 --- !u!114 &536875922912018614
 MonoBehaviour:
   m_ObjectHideFlags: 0

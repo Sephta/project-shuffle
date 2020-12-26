@@ -61,7 +61,7 @@ public class InputManager : MonoBehaviour
         if (_inst == null)
         {
             _inst = this;
-            DontDestroyOnLoad(this);   
+            // DontDestroyOnLoad(this);
         }
         else if (_inst != this)
             GameObject.Destroy(this.gameObject);

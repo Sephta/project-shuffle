@@ -1,18 +1,27 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
+
+/// <summary>
+/// Loads the Initialization Scene so that needed system dependencies can be accessed from any other scene in the editor
+/// </summary>
 public class InitManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+#if UNITY_EDITOR
+    [Header("Scene Data")]
+    public string sceneNameToLoad = "";
 
-    // Update is called once per frame
-    void Update()
+    void Awake()
     {
-        
+        for (int i = 0; i < SceneManager.sceneCount; ++i)
+		{
+			Scene scene = SceneManager.GetSceneAt(i);
+			if (scene.name == sceneNameToLoad)
+			{
+				return;
+			}
+		}
+		SceneManager.LoadSceneAsync(sceneNameToLoad, LoadSceneMode.Additive);
     }
+#endif
 }

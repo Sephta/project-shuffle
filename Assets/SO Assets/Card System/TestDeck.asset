@@ -9,9 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e600de3e8594255408998ebd0973ba56, type: 3}
-  m_Name: PlayerTestDataA
+  m_Script: {fileID: 11500000, guid: a6aeae5037de5504abe34ad460a719f5, type: 3}
+  m_Name: TestDeck
   m_EditorClassIdentifier: 
-  moveSpeed: 75
-  colliderRadius: 0.35
-  colliderPos: {x: -0.03, y: 0.05}
+  _cards:
+  - {fileID: 11400000, guid: e2417da11f0f5a14b974123e292f4762, type: 2}
