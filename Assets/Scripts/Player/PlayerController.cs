@@ -28,6 +28,7 @@ public class PlayerController : MonoBehaviour
     [Tooltip("Will allow collider data to be changed at runtime.")]
     public bool changeColliderData = false;
     [SerializeField, ReadOnly] public Vector2 direction = Vector2.zero;
+    [SerializeField, ReadOnly] private CardSO _currEquip;
     [SerializeField, Range(0f, 0.25f)] public float attackDownTime = 0.5f;
     [SerializeField, ReadOnly] private float downTime = 0f;
     [SerializeField, ReadOnly] private float timeSinceLastAttack = 0f;
@@ -75,7 +76,13 @@ public class PlayerController : MonoBehaviour
         pHand.ResetHand();
     }
 
-    // void Start() {}
+    void Start()
+    {
+        if (pHand != null)
+        {
+            _currEquip = pHand.Cards[1];
+        }
+    }
 
     void Update()
     {
@@ -102,12 +109,31 @@ public class PlayerController : MonoBehaviour
         {
             timeSinceLastAttack = Time.time;
             LeanPool.Spawn(_proj, _projSpawnLocation.position, _projSpawnLocation.rotation, null);
+            KnockbackEvent.RaiseEvent();
         }
     }
 
     public void ApplyKnockback()
     {
+        if (_currEquip == null)
+            return;
+        
+        WeaponCardSO weapon = (_currEquip.CardType == ItemType.weapon) ? _currEquip as WeaponCardSO : null;
 
+        Vector3 dir = _projSpawnLocation.transform.position - transform.position;
+
+        if (weapon != null)
+            _rb.AddForce(weapon.KnockBackMagnitude * -dir.normalized * Time.fixedDeltaTime, ForceMode2D.Impulse);
+    }
+
+    IEnumerator KnockbackTimestep()
+    {
+        if (_rb != null)
+        {
+            // _rb.AddForce();
+        }
+
+        yield return null;
     }
 
     public void AddCardToHand(CardSO card)
@@ -117,6 +143,7 @@ public class PlayerController : MonoBehaviour
             if (pHand.Cards[i] == null)
             {
                 pHand.Cards[i] = card;
+                _currEquip = pHand.Cards[i];
                 break;
             }
         }
