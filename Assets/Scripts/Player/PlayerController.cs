@@ -48,6 +48,22 @@ public class PlayerController : MonoBehaviour
             _anim = _child.GetComponent<Animator>();
     }
 
+    void OnEnable()
+    {
+        if (KnockbackEvent != null)
+        {
+            KnockbackEvent.OnEventRaised += ApplyKnockback;
+        }
+    }
+    
+    void OnDisable()
+    {
+        if (KnockbackEvent != null)
+        {
+            KnockbackEvent.OnEventRaised -= ApplyKnockback;
+        }
+    }
+
     // void Start() {}
 
     void Update()
@@ -76,6 +92,11 @@ public class PlayerController : MonoBehaviour
             timeSinceLastAttack = Time.time;
             LeanPool.Spawn(_proj, _projSpawnLocation.position, _projSpawnLocation.rotation, null);
         }
+    }
+
+    public void ApplyKnockback()
+    {
+
     }
 
 
