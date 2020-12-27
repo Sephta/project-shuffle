@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using NaughtyAttributes;
 
 
 /// <summary>
@@ -9,7 +10,7 @@ public class InitManager : MonoBehaviour
 {
 #if UNITY_EDITOR
     [Header("Scene Data")]
-    public string sceneNameToLoad = "";
+    [Scene] public string sceneNameToLoad = "";
 
     void Awake()
     {
