@@ -13,4 +13,11 @@ public class HandSO : ScriptableObject
 
     public List<CardSO> Cards => _cards;
     public int MaxSize => _maxSize;
+
+
+    public void ResetHand()
+    {
+        for (int i = 0; i < _cards.Count; i++)
+            _cards[i] = null;
+    }
 }

@@ -21,13 +21,14 @@ public class PlayerController : MonoBehaviour
 
     [Header("Player Event Channels")]
     public VoidEventChannelSO KnockbackEvent;
+    public CardSOEvent RecieveCardEvent;
 
     [Header("Debug Data")]
     
     [Tooltip("Will allow collider data to be changed at runtime.")]
     public bool changeColliderData = false;
     [SerializeField, ReadOnly] public Vector2 direction = Vector2.zero;
-    [SerializeField] public float attackDownTime = 0.5f;
+    [SerializeField, Range(0f, 0.25f)] public float attackDownTime = 0.5f;
     [SerializeField, ReadOnly] private float downTime = 0f;
     [SerializeField, ReadOnly] private float timeSinceLastAttack = 0f;
 
@@ -54,6 +55,10 @@ public class PlayerController : MonoBehaviour
         {
             KnockbackEvent.OnEventRaised += ApplyKnockback;
         }
+        if (RecieveCardEvent != null)
+        {
+            RecieveCardEvent.OnEventRaised += AddCardToHand;
+        }
     }
     
     void OnDisable()
@@ -62,6 +67,12 @@ public class PlayerController : MonoBehaviour
         {
             KnockbackEvent.OnEventRaised -= ApplyKnockback;
         }
+        if (RecieveCardEvent != null)
+        {
+            RecieveCardEvent.OnEventRaised -= AddCardToHand;
+        }
+
+        pHand.ResetHand();
     }
 
     // void Start() {}
@@ -97,6 +108,18 @@ public class PlayerController : MonoBehaviour
     public void ApplyKnockback()
     {
 
+    }
+
+    public void AddCardToHand(CardSO card)
+    {
+        for (var i = 0; i < pHand.Cards.Count; i++)
+        {
+            if (pHand.Cards[i] == null)
+            {
+                pHand.Cards[i] = card;
+                break;
+            }
+        }
     }
 
 

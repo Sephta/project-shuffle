@@ -214,14 +214,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e18772af580cc4489b3dccf87fe45c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _child: {fileID: 0}
-  _rb: {fileID: 0}
-  _col: {fileID: 0}
-  _anim: {fileID: 0}
+  _child: {fileID: 536875922904622768}
+  _rb: {fileID: 536875922912018616}
+  _col: {fileID: 536875922912018619}
+  _anim: {fileID: 536875922904622766}
   _proj: {fileID: 1329111819759016298, guid: c112392f8f5c5da439f674efb004482f, type: 3}
   _projSpawnLocation: {fileID: 536875922201866005}
   pData: {fileID: 0}
   pHand: {fileID: 0}
+  KnockbackEvent: {fileID: 0}
+  RecieveCardEvent: {fileID: 0}
   changeColliderData: 0
   direction: {x: 0, y: 0}
   attackDownTime: 0.5

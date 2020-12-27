@@ -537,6 +537,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 494506537}
   m_PrefabAsset: {fileID: 0}
+--- !u!58 &630532629 stripped
+CircleCollider2D:
+  m_CorrespondingSourceObject: {fileID: 2635245551238078279, guid: 2672909d090c8d746959088ab41c78bf,
+    type: 3}
+  m_PrefabInstance: {fileID: 4191944491375342839}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &940899566
 GameObject:
   m_ObjectHideFlags: 0
@@ -1362,6 +1368,12 @@ PrefabInstance:
         type: 2}
     - target: {fileID: 536875922912018617, guid: 1b1af3460d2f2f746b59bacc9264c816,
         type: 3}
+      propertyPath: stringEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: f25a7f689232b394093afb7bff9a6ee2,
+        type: 2}
+    - target: {fileID: 536875922912018617, guid: 1b1af3460d2f2f746b59bacc9264c816,
+        type: 3}
       propertyPath: KnockbackEvent
       value: 
       objectReference: {fileID: 11400000, guid: 95ca2ce4c10aec14aa5afd2a65614189,
@@ -1369,8 +1381,14 @@ PrefabInstance:
     - target: {fileID: 536875922912018617, guid: 1b1af3460d2f2f746b59bacc9264c816,
         type: 3}
       propertyPath: attackDownTime
-      value: 0.01
+      value: 0.06
       objectReference: {fileID: 0}
+    - target: {fileID: 536875922912018617, guid: 1b1af3460d2f2f746b59bacc9264c816,
+        type: 3}
+      propertyPath: RecieveCardEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: 7f743744a2d899f47a08304b40d5b441,
+        type: 2}
     - target: {fileID: 536875922912018620, guid: 1b1af3460d2f2f746b59bacc9264c816,
         type: 3}
       propertyPath: m_Name
@@ -1514,6 +1532,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2635245551238078279, guid: 2672909d090c8d746959088ab41c78bf,
+        type: 3}
+      propertyPath: m_Radius
+      value: 0.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 4191944491000704456, guid: 2672909d090c8d746959088ab41c78bf,
+        type: 3}
+      propertyPath: _col
+      value: 
+      objectReference: {fileID: 630532629}
     - target: {fileID: 4191944491000704456, guid: 2672909d090c8d746959088ab41c78bf,
         type: 3}
       propertyPath: cardData
@@ -1530,6 +1558,11 @@ PrefabInstance:
         type: 3}
       propertyPath: tagToDetect
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 4191944491000704456, guid: 2672909d090c8d746959088ab41c78bf,
+        type: 3}
+      propertyPath: colliderRadius
+      value: 0.35
       objectReference: {fileID: 0}
     - target: {fileID: 4191944491000704457, guid: 2672909d090c8d746959088ab41c78bf,
         type: 3}

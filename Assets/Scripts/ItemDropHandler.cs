@@ -7,20 +7,34 @@ using NaughtyAttributes;
 public class ItemDropHandler : MonoBehaviour
 {
     [Header("Drop Data")]
+    public CircleCollider2D _col = null;
     [Expandable] public CardSO cardData = null;
+    [OnValueChanged("OnRadiusValueChanged")] public float colliderRadius = 0f;
+
+    [Header("Item Events")]
     [Required] public VoidEventChannelSO pickupEvent;
+    [Required] public CardSOEvent grantPlayerCardEvent;
 
     [Header("Debug Data")]
     [ReadOnly] public ItemType cardType;
     [SerializeField, Tag] private string tagToDetect = "";
 
 #region Unity Functions
-    // void Awake() {}
+    void Awake()
+    {
+        if (_col == null && GetComponent<CircleCollider2D>() != null)
+            _col = GetComponent<CircleCollider2D>();
+    }
+
     void OnEnable()
     {
         if (pickupEvent != null)
         {
             pickupEvent.OnEventRaised += DestoryEntity;
+        }
+        if (grantPlayerCardEvent != null)
+        {
+            // grantPlayerCardEvent.OnEventRaised += 
         }
     }
     void OnDisable()
@@ -28,6 +42,10 @@ public class ItemDropHandler : MonoBehaviour
         if (pickupEvent != null)
         {
             pickupEvent.OnEventRaised -= DestoryEntity;
+        }
+        if (grantPlayerCardEvent != null)
+        {
+            // grantPlayerCardEvent.OnEventRaised -= 
         }
     }
 
@@ -54,7 +72,17 @@ public class ItemDropHandler : MonoBehaviour
 #region Class Functions
     private void DestoryEntity()
     {
+        if (grantPlayerCardEvent != null)
+            grantPlayerCardEvent.RaiseEvent(cardData);
         Destroy(this.gameObject);
+    }
+
+    private void OnRadiusValueChanged()
+    {
+        if (_col == null)
+            return;
+
+        _col.radius = colliderRadius;
     }
 #endregion
 }

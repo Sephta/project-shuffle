@@ -98,7 +98,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.35
 --- !u!114 &4191944491000704456
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -111,7 +111,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 894368a36c40b404e969a8803c913291, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _col: {fileID: 2635245551238078279}
   cardData: {fileID: 0}
+  colliderRadius: 0.35
   pickupEvent: {fileID: 11400000, guid: 3e8336b312829e347ab5edc6a4774c97, type: 2}
+  grantPlayerCardEvent: {fileID: 11400000, guid: 7f743744a2d899f47a08304b40d5b441,
+    type: 2}
   cardType: 0
   tagToDetect: Player
