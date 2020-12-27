@@ -1389,6 +1389,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 7f743744a2d899f47a08304b40d5b441,
         type: 2}
+    - target: {fileID: 536875922912018617, guid: 1b1af3460d2f2f746b59bacc9264c816,
+        type: 3}
+      propertyPath: changeColliderData
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 536875922912018620, guid: 1b1af3460d2f2f746b59bacc9264c816,
         type: 3}
       propertyPath: m_Name

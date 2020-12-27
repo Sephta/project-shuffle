@@ -32,10 +32,10 @@ public class ItemDropHandler : MonoBehaviour
         {
             pickupEvent.OnEventRaised += DestoryEntity;
         }
-        if (grantPlayerCardEvent != null)
-        {
-            // grantPlayerCardEvent.OnEventRaised += 
-        }
+        // if (grantPlayerCardEvent != null)
+        // {
+        //     // grantPlayerCardEvent.OnEventRaised += 
+        // }
     }
     void OnDisable()
     {
@@ -43,10 +43,10 @@ public class ItemDropHandler : MonoBehaviour
         {
             pickupEvent.OnEventRaised -= DestoryEntity;
         }
-        if (grantPlayerCardEvent != null)
-        {
-            // grantPlayerCardEvent.OnEventRaised -= 
-        }
+        // if (grantPlayerCardEvent != null)
+        // {
+        //     // grantPlayerCardEvent.OnEventRaised -= 
+        // }
     }
 
     void Start()
@@ -77,6 +77,7 @@ public class ItemDropHandler : MonoBehaviour
         Destroy(this.gameObject);
     }
 
+#if UNITY_EDITOR
     private void OnRadiusValueChanged()
     {
         if (_col == null)
@@ -84,5 +85,6 @@ public class ItemDropHandler : MonoBehaviour
 
         _col.radius = colliderRadius;
     }
+#endif
 #endregion
 }
