@@ -21,7 +21,7 @@ public class CardSO : ScriptableObject
     
     [SerializeField] private ItemType _type = (ItemType)0;
     
-    [SerializeField, ShowAssetPreview(16, 16)]
+    [SerializeField, ShowAssetPreview(128, 128)]
     private Sprite _sprite = null;
 
 

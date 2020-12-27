@@ -13,6 +13,7 @@ public class VoidEventChannelSO : ScriptableObject
 
     public void RaiseEvent()
 	{
+		Debug.Log("Void Event \"" + this.name + "\" has been Invoked.");
 		OnEventRaised?.Invoke();
 	}
 }
