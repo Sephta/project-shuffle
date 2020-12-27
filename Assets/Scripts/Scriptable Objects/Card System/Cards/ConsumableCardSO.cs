@@ -6,7 +6,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "CardData", menuName = "ScriptableObjects/CardSystem/Cards/ConsumableCard", order = 2)]
 public class ConsumableCardSO : CardSO
 {
-    [Header("Consumble-Card Specific Data")]
+    [Header("Consumble Specific Data")]
     [SerializeField] private int _test = 0;
     public int Test => _test;
 }

@@ -18,5 +18,5 @@ MonoBehaviour:
     type: 3}
   _rof: 0.125
   _knockBackIntensity: 1
-  _knockBackX: {x: -0.24260354, y: 0.25739646}
+  _knockBackX: {x: 0, y: 0}
   _knockBackY: {x: -0.24260353, y: 0.25739646}

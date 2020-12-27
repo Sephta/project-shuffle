@@ -8,7 +8,7 @@ using NaughtyAttributes;
 public class WeaponCardSO : CardSO
 {
     [HorizontalLine(color: EColor.Black)]
-    [Header("Weapon-Card Specific Data")]
+    [Header("Weapon Specific Data")]
     
     [SerializeField] private GameObject _projPrefab = null;
 
