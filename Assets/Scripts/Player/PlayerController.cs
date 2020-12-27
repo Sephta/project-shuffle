@@ -16,8 +16,11 @@ public class PlayerController : MonoBehaviour
     public Transform _projSpawnLocation = null;
 
     [Header("Configurable Data")]
-    public PlayerData pData = null;
-    public HandSO pHand = null;
+    [Expandable] public PlayerData pData = null;
+    [Expandable] public HandSO pHand = null;
+
+    [Header("Player Event Channels")]
+    public VoidEventChannelSO KnockbackEvent;
 
     [Header("Debug Data")]
     

@@ -1362,6 +1362,12 @@ PrefabInstance:
         type: 2}
     - target: {fileID: 536875922912018617, guid: 1b1af3460d2f2f746b59bacc9264c816,
         type: 3}
+      propertyPath: KnockbackEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: 95ca2ce4c10aec14aa5afd2a65614189,
+        type: 2}
+    - target: {fileID: 536875922912018617, guid: 1b1af3460d2f2f746b59bacc9264c816,
+        type: 3}
       propertyPath: attackDownTime
       value: 0.01
       objectReference: {fileID: 0}
@@ -1507,7 +1513,7 @@ PrefabInstance:
         type: 3}
       propertyPath: cardData
       value: 
-      objectReference: {fileID: 11400000, guid: e2417da11f0f5a14b974123e292f4762,
+      objectReference: {fileID: 11400000, guid: a0d6aae941686fe47b7ca6fb4e513661,
         type: 2}
     - target: {fileID: 4191944491000704457, guid: 2672909d090c8d746959088ab41c78bf,
         type: 3}

@@ -9,9 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e600de3e8594255408998ebd0973ba56, type: 3}
-  m_Name: PlayerTestDataA
+  m_Script: {fileID: 11500000, guid: 868a216243e533947b697b5520845f5d, type: 3}
+  m_Name: player_KnockbackEvent
   m_EditorClassIdentifier: 
-  moveSpeed: 75
-  colliderRadius: 0.25
-  colliderPos: {x: -0.03, y: 0.05}

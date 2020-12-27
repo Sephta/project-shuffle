@@ -7,6 +7,7 @@ using UnityEngine;
 public class HandSO : ScriptableObject
 {
     [Header("Hand Specific Data")]
+    
     [SerializeField] private int _maxSize = 0;
     [SerializeField] private List<CardSO> _cards = new List<CardSO>();
 

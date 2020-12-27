@@ -7,6 +7,7 @@ using UnityEngine;
 public class DeckSO : ScriptableObject
 {
     [Header("Deck Specific Data")]
+    
     [SerializeField] private List<CardSO> _cards = new List<CardSO>();
 
     public List<CardSO> Cards => _cards;
