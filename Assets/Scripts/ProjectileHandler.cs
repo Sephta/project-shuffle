@@ -4,7 +4,7 @@ using NaughtyAttributes;
 
 
 /// <summary>
-/// Monobehavior for simulating projectile data, requires use of LeanPooling
+/// Monobehavior for simulating projectile data, requires use of LeanPool
 /// </summary>
 public class ProjectileHandler : MonoBehaviour, IPoolable
 {
@@ -31,6 +31,8 @@ public class ProjectileHandler : MonoBehaviour, IPoolable
             _rb = GetComponent<Rigidbody2D>();
     }
 
+    // void OnEnable() {}
+    // void OnDisable() {}
     // void Start() {}
 
     void Update()
@@ -61,7 +63,7 @@ public class ProjectileHandler : MonoBehaviour, IPoolable
     }
 #endregion
 
-#region ProjectileHandler Methods
+#region Class Methods
     private void InitializeProjectileData()
     {
         speed = _projData.Speed;

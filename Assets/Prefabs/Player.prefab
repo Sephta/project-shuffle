@@ -140,6 +140,7 @@ GameObject:
   - component: {fileID: 536875922912018616}
   - component: {fileID: 536875922912018619}
   - component: {fileID: 536875922912018617}
+  - component: {fileID: 7382565330963542289}
   - component: {fileID: 536875922912018614}
   m_Layer: 0
   m_Name: Player
@@ -219,16 +220,32 @@ MonoBehaviour:
   _col: {fileID: 536875922912018619}
   _anim: {fileID: 536875922904622766}
   _proj: {fileID: 1329111819759016298, guid: c112392f8f5c5da439f674efb004482f, type: 3}
+  _equipmentSlot: {fileID: 536875924169197652}
   _projSpawnLocation: {fileID: 536875922201866005}
   pData: {fileID: 0}
   pHand: {fileID: 0}
   KnockbackEvent: {fileID: 0}
   RecieveCardEvent: {fileID: 0}
+  EquipEvent: {fileID: 0}
   changeColliderData: 0
+  _equipedVisuals: {fileID: 0}
   direction: {x: 0, y: 0}
+  _currEquip: {fileID: 0}
   attackDownTime: 0.5
   downTime: 0
   timeSinceLastAttack: 0
+--- !u!114 &7382565330963542289
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 536875922912018620}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 800a9319cec184e4ea5c87946e35edea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &536875922912018614
 MonoBehaviour:
   m_ObjectHideFlags: 0

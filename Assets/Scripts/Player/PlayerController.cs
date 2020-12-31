@@ -1,5 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿// using System.Collections;
+// using System.Collections.Generic;
 using UnityEngine;
 using Lean.Pool;
 using NaughtyAttributes;
@@ -7,12 +7,14 @@ using NaughtyAttributes;
 
 public class PlayerController : MonoBehaviour
 {
+    [Foldout("Components")] public GameObject _child = null;
+    [Foldout("Components")] public Rigidbody2D _rb = null;
+    [Foldout("Components")] public Collider2D _col = null;
+    [Foldout("Components")] public Animator _anim = null;
+
     [Header("Dependencies")]
-    public GameObject _child = null;
-    public Rigidbody2D _rb = null;
-    public Collider2D _col = null;
-    public Animator _anim = null;
     public GameObject _proj = null;
+    [Required] public GameObject _equipmentSlot = null;
     public Transform _projSpawnLocation = null;
 
     [Header("Configurable Data")]
@@ -22,16 +24,19 @@ public class PlayerController : MonoBehaviour
     [Header("Player Event Channels")]
     public VoidEventChannelSO KnockbackEvent;
     public CardSOEvent RecieveCardEvent;
+    public VoidEventChannelSO EquipEvent;
 
     [Header("Debug Data")]
+    public bool ShowDebugData = false;
     
-    [Tooltip("Will allow collider data to be changed at runtime.")]
+    [ShowIf("ShowDebugData"), Tooltip("Will allow collider data to be changed at runtime.")]
     public bool changeColliderData = false;
-    [SerializeField, ReadOnly] public Vector2 direction = Vector2.zero;
-    [SerializeField, ReadOnly] private CardSO _currEquip;
-    [SerializeField, Range(0f, 0.25f)] public float attackDownTime = 0.5f;
-    [SerializeField, ReadOnly] private float downTime = 0f;
-    [SerializeField, ReadOnly] private float timeSinceLastAttack = 0f;
+    [SerializeField, ReadOnly, ShowIf("ShowDebugData")] private SpriteRenderer _equipedVisuals = null;
+    [SerializeField, ReadOnly, ShowIf("ShowDebugData")] public Vector2 direction = Vector2.zero;
+    [SerializeField, ReadOnly, ShowIf("ShowDebugData")] private CardSO _currEquip;
+    [SerializeField, Range(0f, 0.25f), ShowIf("ShowDebugData")] public float attackDownTime = 0.5f;
+    [SerializeField, ReadOnly, ShowIf("ShowDebugData")] private float downTime = 0f;
+    [SerializeField, ReadOnly, ShowIf("ShowDebugData")] private float timeSinceLastAttack = 0f;
 
 
 #region Unity Functions
@@ -48,6 +53,12 @@ public class PlayerController : MonoBehaviour
         
         if (_anim == null && _child.GetComponent<Animator>() != null)
             _anim = _child.GetComponent<Animator>();
+        
+        if (_equipmentSlot != null)
+        {
+            if (_equipedVisuals == null && _equipmentSlot.GetComponent<SpriteRenderer>() != null)
+                _equipedVisuals = _equipmentSlot.GetComponent<SpriteRenderer>();
+        }
     }
 
     void OnEnable()
@@ -59,6 +70,10 @@ public class PlayerController : MonoBehaviour
         if (RecieveCardEvent != null)
         {
             RecieveCardEvent.OnEventRaised += AddCardToHand;
+        }
+        if (EquipEvent != null)
+        {
+            EquipEvent.OnEventRaised += EquipItem;
         }
     }
     
@@ -72,6 +87,10 @@ public class PlayerController : MonoBehaviour
         {
             RecieveCardEvent.OnEventRaised -= AddCardToHand;
         }
+        if (EquipEvent != null)
+        {
+            EquipEvent.OnEventRaised -= EquipItem;
+        }
 
         pHand.ResetHand();
     }
@@ -82,6 +101,8 @@ public class PlayerController : MonoBehaviour
         {
             _currEquip = pHand.Cards[1];
         }
+
+        EquipEvent.RaiseEvent();
     }
 
     void Update()
@@ -105,7 +126,8 @@ public class PlayerController : MonoBehaviour
 
     public void FireProjectile()
     {
-        if ((Time.time - timeSinceLastAttack) >= attackDownTime)
+        if ((Time.time - timeSinceLastAttack) >= attackDownTime
+            && _currEquip != null)
         {
             timeSinceLastAttack = Time.time;
             LeanPool.Spawn(_proj, _projSpawnLocation.position, _projSpawnLocation.rotation, null);
@@ -126,16 +148,6 @@ public class PlayerController : MonoBehaviour
             _rb.AddForce(weapon.KnockBackMagnitude * -dir.normalized * Time.fixedDeltaTime, ForceMode2D.Impulse);
     }
 
-    IEnumerator KnockbackTimestep()
-    {
-        if (_rb != null)
-        {
-            // _rb.AddForce();
-        }
-
-        yield return null;
-    }
-
     public void AddCardToHand(CardSO card)
     {
         for (var i = 0; i < pHand.Cards.Count; i++)
@@ -144,6 +156,7 @@ public class PlayerController : MonoBehaviour
             {
                 pHand.Cards[i] = card;
                 _currEquip = pHand.Cards[i];
+                EquipEvent.RaiseEvent();
                 break;
             }
         }
@@ -223,6 +236,21 @@ public class PlayerController : MonoBehaviour
         
         if (Input.GetKey(InputManager._inst._keyBindings[InputAction.attack]))
             FireProjectile();
+    }
+
+    private void EquipItem()
+    {
+        if (_equipedVisuals == null)
+            return;
+        
+        if (_currEquip == null)
+        {
+            _equipedVisuals.sprite = null;
+            return;
+        }
+
+        _equipedVisuals.sprite = _currEquip.CardSprite;
+        
     }
 #endregion
 }

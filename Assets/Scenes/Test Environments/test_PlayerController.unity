@@ -882,6 +882,36 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1426412027
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1426412028}
+  m_Layer: 0
+  m_Name: ~Projectile
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1426412028
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1426412027}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1697316267
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1053,6 +1083,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1329111819759016294, guid: c112392f8f5c5da439f674efb004482f,
     type: 3}
   m_PrefabInstance: {fileID: 1815250745}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1816040878 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 536875924169197652, guid: 1b1af3460d2f2f746b59bacc9264c816,
+    type: 3}
+  m_PrefabInstance: {fileID: 536875922954770494}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1823412782
 GameObject:
@@ -1368,16 +1404,32 @@ PrefabInstance:
         type: 2}
     - target: {fileID: 536875922912018617, guid: 1b1af3460d2f2f746b59bacc9264c816,
         type: 3}
+      propertyPath: EquipEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: 2e57da8dd9d7e9f4e87b9e7779d74afc,
+        type: 2}
+    - target: {fileID: 536875922912018617, guid: 1b1af3460d2f2f746b59bacc9264c816,
+        type: 3}
       propertyPath: stringEvent
       value: 
       objectReference: {fileID: 11400000, guid: f25a7f689232b394093afb7bff9a6ee2,
         type: 2}
     - target: {fileID: 536875922912018617, guid: 1b1af3460d2f2f746b59bacc9264c816,
         type: 3}
+      propertyPath: ShowDebugData
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 536875922912018617, guid: 1b1af3460d2f2f746b59bacc9264c816,
+        type: 3}
       propertyPath: KnockbackEvent
       value: 
       objectReference: {fileID: 11400000, guid: 95ca2ce4c10aec14aa5afd2a65614189,
         type: 2}
+    - target: {fileID: 536875922912018617, guid: 1b1af3460d2f2f746b59bacc9264c816,
+        type: 3}
+      propertyPath: _equipmentSlot
+      value: 
+      objectReference: {fileID: 1816040878}
     - target: {fileID: 536875922912018617, guid: 1b1af3460d2f2f746b59bacc9264c816,
         type: 3}
       propertyPath: attackDownTime
@@ -1459,6 +1511,23 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7382565330963542289, guid: 1b1af3460d2f2f746b59bacc9264c816,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7382565330963542289, guid: 1b1af3460d2f2f746b59bacc9264c816,
+        type: 3}
+      propertyPath: PlayerMoveEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: 5c0a4ef4d05b30b458f3dd930e7b54dd,
+        type: 2}
+    - target: {fileID: 7382565330963542289, guid: 1b1af3460d2f2f746b59bacc9264c816,
+        type: 3}
+      propertyPath: PlayerAttack01Event
+      value: 
+      objectReference: {fileID: 11400000, guid: 4861e76cadade2b4291f655b566452d3,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1b1af3460d2f2f746b59bacc9264c816, type: 3}
 --- !u!1001 &4137913315103775054
@@ -1628,11 +1697,12 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2275341131457590741, guid: 6d3687b5d6eb2c749bccaaef0796b296,
+        type: 3}
     - target: {fileID: 4191944491000704458, guid: 2672909d090c8d746959088ab41c78bf,
         type: 3}
       propertyPath: m_WasSpriteAssigned
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4191944491000704459, guid: 2672909d090c8d746959088ab41c78bf,
         type: 3}
