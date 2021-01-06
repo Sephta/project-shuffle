@@ -66,6 +66,14 @@ public class ProjectileHandler : MonoBehaviour, IPoolable
 #region Class Methods
     private void InitializeProjectileData()
     {
+        if (_projData == null)
+        {
+            Debug.LogError("ERROR! reference to projectile data on this projectile is null.");
+            return;
+        }
+
+        gameObject.name = gameObject.name + "_" + _projData.name;
+
         speed = _projData.Speed;
         currLifetime = lifeTime = _projData.ProjectileLifetime;
 
@@ -79,6 +87,7 @@ public class ProjectileHandler : MonoBehaviour, IPoolable
     private void ResetProjectileData()
     {
         currLifetime = lifeTime;
+        gameObject.name = "Projectile";
     }
 
     private void MovementBehavior_straight()

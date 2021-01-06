@@ -7,13 +7,20 @@ using NaughtyAttributes;
 
 public class PlayerController : MonoBehaviour
 {
+    // COMPONENT REFERENCES
     [Foldout("Components")] public GameObject _child = null;
     [Foldout("Components")] public Rigidbody2D _rb = null;
     [Foldout("Components")] public Collider2D _col = null;
     [Foldout("Components")] public Animator _anim = null;
 
+    // EVENT CHANNELS
+    [Foldout("Event Channels")] public VoidEventChannelSO KnockbackEvent;
+    [Foldout("Event Channels")] public CardSOEvent RecieveCardEvent;
+    [Foldout("Event Channels")] public VoidEventChannelSO EquipEvent;
+
     [Header("Dependencies")]
     public GameObject _proj = null;
+    public GameObject _projParentObject = null;
     [Required] public GameObject _equipmentSlot = null;
     public Transform _projSpawnLocation = null;
 
@@ -21,14 +28,11 @@ public class PlayerController : MonoBehaviour
     [Expandable] public PlayerData pData = null;
     [Expandable] public HandSO pHand = null;
 
-    [Header("Player Event Channels")]
-    public VoidEventChannelSO KnockbackEvent;
-    public CardSOEvent RecieveCardEvent;
-    public VoidEventChannelSO EquipEvent;
-
     [Header("Debug Data")]
+#if UNITY_EDITOR
     public bool ShowDebugData = false;
-    
+#endif
+
     [ShowIf("ShowDebugData"), Tooltip("Will allow collider data to be changed at runtime.")]
     public bool changeColliderData = false;
     [SerializeField, ReadOnly, ShowIf("ShowDebugData")] private SpriteRenderer _equipedVisuals = null;
@@ -42,6 +46,9 @@ public class PlayerController : MonoBehaviour
 #region Unity Functions
     void Awake()
     {
+        if (_projParentObject == null && GameObject.Find("~Projectiles") != null)
+            _projParentObject = GameObject.Find("~Projectiles");
+
         if (_child == null)
             _child = transform.GetChild(0).gameObject;
 
@@ -130,7 +137,7 @@ public class PlayerController : MonoBehaviour
             && _currEquip != null)
         {
             timeSinceLastAttack = Time.time;
-            LeanPool.Spawn(_proj, _projSpawnLocation.position, _projSpawnLocation.rotation, null);
+            GameObject refr = LeanPool.Spawn(_proj, _projSpawnLocation.position, _projSpawnLocation.rotation, _projParentObject.transform);
             KnockbackEvent.RaiseEvent();
         }
     }

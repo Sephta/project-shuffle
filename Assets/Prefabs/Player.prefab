@@ -141,10 +141,9 @@ GameObject:
   - component: {fileID: 536875922912018619}
   - component: {fileID: 536875922912018617}
   - component: {fileID: 7382565330963542289}
-  - component: {fileID: 536875922912018614}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -156,7 +155,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 536875922912018620}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -219,19 +218,21 @@ MonoBehaviour:
   _rb: {fileID: 536875922912018616}
   _col: {fileID: 536875922912018619}
   _anim: {fileID: 536875922904622766}
+  KnockbackEvent: {fileID: 11400000, guid: 95ca2ce4c10aec14aa5afd2a65614189, type: 2}
+  RecieveCardEvent: {fileID: 11400000, guid: 7f743744a2d899f47a08304b40d5b441, type: 2}
+  EquipEvent: {fileID: 11400000, guid: 2e57da8dd9d7e9f4e87b9e7779d74afc, type: 2}
   _proj: {fileID: 1329111819759016298, guid: c112392f8f5c5da439f674efb004482f, type: 3}
+  _projParentObject: {fileID: 0}
   _equipmentSlot: {fileID: 536875924169197652}
   _projSpawnLocation: {fileID: 536875922201866005}
-  pData: {fileID: 0}
-  pHand: {fileID: 0}
-  KnockbackEvent: {fileID: 0}
-  RecieveCardEvent: {fileID: 0}
-  EquipEvent: {fileID: 0}
+  pData: {fileID: 11400000, guid: d497a0d6a29ba6341bf4349d7b771a4b, type: 2}
+  pHand: {fileID: 11400000, guid: aa6b6f4b8004ea84cae2395ba5a13fa7, type: 2}
+  ShowDebugData: 1
   changeColliderData: 0
   _equipedVisuals: {fileID: 0}
   direction: {x: 0, y: 0}
   _currEquip: {fileID: 0}
-  attackDownTime: 0.5
+  attackDownTime: 0.06
   downTime: 0
   timeSinceLastAttack: 0
 --- !u!114 &7382565330963542289
@@ -241,27 +242,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 536875922912018620}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 800a9319cec184e4ea5c87946e35edea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &536875922912018614
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 536875922912018620}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1678fac1f66273d4e9ca381c936ab927, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _sr: {fileID: 536875923368185045}
-  _cam: {fileID: 0}
-  mousePos: {x: 0, y: 0, z: 0}
-  angle: 0
+  PlayerMoveEvent: {fileID: 11400000, guid: 5c0a4ef4d05b30b458f3dd930e7b54dd, type: 2}
+  PlayerAttack01Event: {fileID: 11400000, guid: 4861e76cadade2b4291f655b566452d3,
+    type: 2}
 --- !u!1 &536875923368185047
 GameObject:
   m_ObjectHideFlags: 0
@@ -273,6 +261,7 @@ GameObject:
   - component: {fileID: 536875923368185044}
   - component: {fileID: 536875923368185045}
   - component: {fileID: 536875923368185042}
+  - component: {fileID: 365072102}
   m_Layer: 0
   m_Name: Player Visuals
   m_TagString: Untagged
@@ -358,6 +347,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   toFollow: {fileID: 536875922912018621}
   followSpeed: 0
+--- !u!114 &365072102
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 536875923368185047}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1678fac1f66273d4e9ca381c936ab927, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sr: {fileID: 536875923368185045}
+  _cam: {fileID: 0}
+  mousePos: {x: 0, y: 0, z: 0}
+  angle: 0
 --- !u!1 &536875924169197652
 GameObject:
   m_ObjectHideFlags: 0
@@ -429,8 +434,7 @@ SpriteRenderer:
   m_SortingLayerID: -253921873
   m_SortingLayer: 1
   m_SortingOrder: 1
-  m_Sprite: {fileID: 7777584966538040638, guid: 2c2b2045213a63b4f83f00bcfc5f8d29,
-    type: 3}
+  m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -438,7 +442,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &536875924169197651
