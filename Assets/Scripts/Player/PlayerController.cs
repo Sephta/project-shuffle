@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     [Foldout("Event Channels")] public VoidEventChannelSO KnockbackEvent;
     [Foldout("Event Channels")] public CardSOEvent RecieveCardEvent;
     [Foldout("Event Channels")] public VoidEventChannelSO EquipEvent;
+    [Foldout("Event Channels")] public VoidEventChannelSO UpdatePlayerVisuals;
 
     [Header("Dependencies")]
     public GameObject _proj = null;
@@ -31,14 +32,13 @@ public class PlayerController : MonoBehaviour
     [Header("Debug Data")]
 #if UNITY_EDITOR
     public bool ShowDebugData = false;
+    [SerializeField, ReadOnly, ShowIf("ShowDebugData")] private CardSO _currEquip;
 #endif
 
     [ShowIf("ShowDebugData"), Tooltip("Will allow collider data to be changed at runtime.")]
     public bool changeColliderData = false;
     [SerializeField, ReadOnly, ShowIf("ShowDebugData")] private SpriteRenderer _equipedVisuals = null;
-    [SerializeField, ReadOnly, ShowIf("ShowDebugData")] public Vector2 direction = Vector2.zero;
-    [SerializeField, ReadOnly, ShowIf("ShowDebugData")] private CardSO _currEquip;
-    [SerializeField, Range(0f, 0.25f), ShowIf("ShowDebugData")] public float attackDownTime = 0.5f;
+    [SerializeField, ReadOnly, ShowIf("ShowDebugData")] public Vector2 direction = Vector2.zero;    [SerializeField, Range(0f, 0.25f), ShowIf("ShowDebugData")] public float attackDownTime = 0.5f;
     [SerializeField, ReadOnly, ShowIf("ShowDebugData")] private float downTime = 0f;
     [SerializeField, ReadOnly, ShowIf("ShowDebugData")] private float timeSinceLastAttack = 0f;
 
@@ -82,6 +82,10 @@ public class PlayerController : MonoBehaviour
         {
             EquipEvent.OnEventRaised += EquipItem;
         }
+        if (UpdatePlayerVisuals != null)
+        {
+            UpdatePlayerVisuals.OnEventRaised += RefreshEquipmentVisuals;
+        }
     }
     
     void OnDisable()
@@ -98,6 +102,10 @@ public class PlayerController : MonoBehaviour
         {
             EquipEvent.OnEventRaised -= EquipItem;
         }
+        if (UpdatePlayerVisuals != null)
+        {
+            UpdatePlayerVisuals.OnEventRaised -= RefreshEquipmentVisuals;
+        }
 
         pHand.ResetHand();
     }
@@ -105,9 +113,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         if (pHand != null)
-        {
-            _currEquip = pHand.Cards[1];
-        }
+            pHand.InitHand();
 
         EquipEvent.RaiseEvent();
     }
@@ -118,6 +124,11 @@ public class PlayerController : MonoBehaviour
         CheckPlayerActions();
 
         downTime = (Time.time - timeSinceLastAttack);
+
+#if UNITY_EDITOR
+        if (pHand != null)
+            _currEquip = pHand.CurrentlySelected;
+#endif
     }
 
     void FixedUpdate()
@@ -134,7 +145,7 @@ public class PlayerController : MonoBehaviour
     public void FireProjectile()
     {
         if ((Time.time - timeSinceLastAttack) >= attackDownTime
-            && _currEquip != null)
+            && pHand.CurrentlySelected != null)
         {
             timeSinceLastAttack = Time.time;
             GameObject refr = LeanPool.Spawn(_proj, _projSpawnLocation.position, _projSpawnLocation.rotation, _projParentObject.transform);
@@ -144,10 +155,10 @@ public class PlayerController : MonoBehaviour
 
     public void ApplyKnockback()
     {
-        if (_currEquip == null)
+        if (pHand.CurrentlySelected == null)
             return;
         
-        WeaponCardSO weapon = (_currEquip.CardType == ItemType.weapon) ? _currEquip as WeaponCardSO : null;
+        WeaponCardSO weapon = (pHand.CurrentlySelected.CardType == ItemType.weapon) ? pHand.CurrentlySelected as WeaponCardSO : null;
 
         Vector3 dir = _projSpawnLocation.transform.position - transform.position;
 
@@ -162,7 +173,7 @@ public class PlayerController : MonoBehaviour
             if (pHand.Cards[i] == null)
             {
                 pHand.Cards[i] = card;
-                _currEquip = pHand.Cards[i];
+                pHand.SetCurrentSelect(pHand.Cards[i]);
                 EquipEvent.RaiseEvent();
                 break;
             }
@@ -243,21 +254,46 @@ public class PlayerController : MonoBehaviour
         
         if (Input.GetKey(InputManager._inst._keyBindings[InputAction.attack]))
             FireProjectile();
+        if (Input.GetKeyDown(InputManager._inst._keyBindings[InputAction.nextItem]))
+            if (pHand != null)
+                pHand.NextCard();
+        if (Input.GetKeyDown(InputManager._inst._keyBindings[InputAction.prevItem]))
+            if (pHand != null)
+                pHand.PrevCard();
     }
 
+    /// <summary> Will modify properties of the currently equiped item. </summary>
     private void EquipItem()
     {
         if (_equipedVisuals == null)
             return;
         
-        if (_currEquip == null)
+        if (pHand.CurrentlySelected == null)
         {
             _equipedVisuals.sprite = null;
             return;
         }
 
-        _equipedVisuals.sprite = _currEquip.CardSprite;
+        _equipedVisuals.sprite = pHand.CurrentlySelected.CardSprite;
         
+    }
+
+    // ! Currently the same as EquipItem(), but in the future will likely perform less things
+    /// <summary> For each visual element of the player, will update visuals based on current data. </summary>
+    private void RefreshEquipmentVisuals()
+    {
+        if (_equipedVisuals == null)
+            return;
+        
+        // if the currently selected item is null, player equipment should display as empty
+        if (pHand.CurrentlySelected == null)
+        {
+            _equipedVisuals.sprite = null;
+            return;
+        }
+
+        // Otherwise show whats in the players equiped slot
+        _equipedVisuals.sprite = pHand.CurrentlySelected.CardSprite;
     }
 #endregion
 }

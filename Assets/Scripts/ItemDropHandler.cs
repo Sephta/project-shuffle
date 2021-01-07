@@ -12,7 +12,7 @@ public class ItemDropHandler : MonoBehaviour
     [OnValueChanged("OnRadiusValueChanged")] public float colliderRadius = 0f;
 
     [Header("Item Events")]
-    [Required] public VoidEventChannelSO pickupEvent;
+    [Required] public IntEventChannelSO pickupEvent;
     [Required] public CardSOEvent grantPlayerCardEvent;
 
     [Header("Debug Data")]
@@ -30,7 +30,7 @@ public class ItemDropHandler : MonoBehaviour
     {
         if (pickupEvent != null)
         {
-            pickupEvent.OnEventRaised += DestoryEntity;
+            pickupEvent.OnEventRaised += DestroyEntity;
         }
         // if (grantPlayerCardEvent != null)
         // {
@@ -41,7 +41,7 @@ public class ItemDropHandler : MonoBehaviour
     {
         if (pickupEvent != null)
         {
-            pickupEvent.OnEventRaised -= DestoryEntity;
+            pickupEvent.OnEventRaised -= DestroyEntity;
         }
         // if (grantPlayerCardEvent != null)
         // {
@@ -52,6 +52,8 @@ public class ItemDropHandler : MonoBehaviour
     void Start()
     {
         cardType = cardData.CardType;
+
+        Debug.Log(gameObject.name + " has InstanceId: " + gameObject.GetInstanceID());
     }
 
     // void Update() {}
@@ -62,7 +64,9 @@ public class ItemDropHandler : MonoBehaviour
         if (collider.tag == tagToDetect)
         {
             if (pickupEvent != null)
-                pickupEvent.RaiseEvent();
+            {
+                pickupEvent.RaiseEvent(gameObject.GetInstanceID());
+            }
         }
     }
 
@@ -70,11 +74,20 @@ public class ItemDropHandler : MonoBehaviour
 #endregion
 
 #region Class Functions
-    private void DestoryEntity()
+
+    /// <summary>
+    /// Destroys GameObject this script is attatched to, but checks to see if IDs match before doing so. 
+    /// Also invokes event to give player a new card.
+    /// </summary>
+    private void DestroyEntity(int idToCheck)
     {
-        if (grantPlayerCardEvent != null)
-            grantPlayerCardEvent.RaiseEvent(cardData);
-        Destroy(this.gameObject);
+        Debug.Log("IDToCheck = " + idToCheck + ", and " + gameObject.name + " has ID: " + gameObject.GetInstanceID());
+        if (idToCheck == gameObject.GetInstanceID())
+        {
+            if (grantPlayerCardEvent != null)
+                grantPlayerCardEvent.RaiseEvent(cardData);
+            Destroy(this.gameObject);
+        }
     }
 
 #if UNITY_EDITOR

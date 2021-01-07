@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f631d287fe4635149b3412a5c700ce40, type: 3}
   m_Name: TestPlayerHand
   m_EditorClassIdentifier: 
+  _selected: {fileID: 0}
+  _selectedIndex: 0
   _maxSize: 5
   _cards:
   - {fileID: 0}
@@ -19,3 +21,4 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  PlayerVisuals: {fileID: 11400000, guid: 01ec9916e179df04b9164bf4f750b996, type: 2}

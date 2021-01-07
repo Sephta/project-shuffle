@@ -16,7 +16,7 @@ public class WeaponCardSO : CardSO
     [SerializeField, Range(0f, 1f), Tooltip("This var describes the rate of fire as: projectiles per second.")]
     private float _rof = 0f;
 
-    [SerializeField, Range(0f, 500f)] private float _knockBackIntensity = 0f;
+    [SerializeField, Range(0f, 50000f)] private float _knockBackMagnitude = 0f;
     [SerializeField, MinMaxSlider(-1f, 1f)] private Vector2 _knockBackX = Vector2.zero;
     [SerializeField, MinMaxSlider(-1f, 1f)] private Vector2 _knockBackY = Vector2.zero;
     
@@ -34,5 +34,5 @@ public class WeaponCardSO : CardSO
         }
     }
 
-    public float KnockBackMagnitude => _knockBackIntensity;
+    public float KnockBackMagnitude => _knockBackMagnitude;
 }
