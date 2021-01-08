@@ -78,7 +78,6 @@ public class HandSO : ScriptableObject
     public void NextCard()
     {
         _selectedIndex = (_selectedIndex + 1) % _cards.Count;
-        Debug.Log(_selectedIndex);
         _selected = _cards[_selectedIndex];
 
         // Update the player visuals to reflect equipment changes
@@ -89,7 +88,6 @@ public class HandSO : ScriptableObject
     public void PrevCard()
     {
         _selectedIndex = (_selectedIndex - 1 + _cards.Count) % _cards.Count;
-        Debug.Log(_selectedIndex);
         _selected = _cards[_selectedIndex];
 
         // Update the player visuals to reflect equipment changes
