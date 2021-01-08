@@ -28,7 +28,7 @@ public class CameraController : MonoBehaviour
     [SerializeField, Range(0f, 5f), Tooltip("How far away it should be when the mouse is at the edge of the screen.")]
     private float cameraDist = 0f;
     
-    [SerializeField]
+    [SerializeField, Range(0.1f, 1f)]
     private float smoothTime = 0.2f;
     
     [SerializeField]
@@ -126,10 +126,12 @@ public class CameraController : MonoBehaviour
         return result;
     }
 
+#if UNITY_EDITOR
     [Button("Press to show Debug Data")]
     private void ToggleDebugData()
     {
         ShowDebugData = !ShowDebugData;
     }
+#endif
 #endregion
 }

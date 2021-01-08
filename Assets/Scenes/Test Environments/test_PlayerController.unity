@@ -9356,6 +9356,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: cb195948c8c16df48aa0f23d97ef33ee,
         type: 2}
+    - target: {fileID: 536875922912018617, guid: 1b1af3460d2f2f746b59bacc9264c816,
+        type: 3}
+      propertyPath: applyWeaponKnockback
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 536875922912018620, guid: 1b1af3460d2f2f746b59bacc9264c816,
         type: 3}
       propertyPath: m_Name
@@ -9625,7 +9630,12 @@ PrefabInstance:
     - target: {fileID: 4733965541795119358, guid: cc2cc09d80575ab4f8ea7fad21a46623,
         type: 3}
       propertyPath: cameraDist
-      value: 5
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4733965541795119358, guid: cc2cc09d80575ab4f8ea7fad21a46623,
+        type: 3}
+      propertyPath: smoothTime
+      value: 0.267
       objectReference: {fileID: 0}
     - target: {fileID: 4733965541795119358, guid: cc2cc09d80575ab4f8ea7fad21a46623,
         type: 3}
