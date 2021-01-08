@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
     [Foldout("Event Channels")] public VoidEventChannelSO EquipEvent;
     [Foldout("Event Channels")] public VoidEventChannelSO UpdatePlayerVisuals;
     [Foldout("Event Channels")] public IntEventChannelSO UpdateProjectileData;
+    [Foldout("Event Channels")] public VoidEventChannelSO CameraShakeEvent;
 #endregion
 
     [Header("Dependencies")]
@@ -182,8 +183,11 @@ public class PlayerController : MonoBehaviour
             if (UpdateProjectileData != null)
                 UpdateProjectileData.RaiseEvent(refr.gameObject.GetInstanceID());
 
-            // Apply player knockback
-            KnockbackEvent.RaiseEvent();
+            // Activate necessary events
+            if (KnockbackEvent != null)
+                KnockbackEvent.RaiseEvent();
+            if (CameraShakeEvent != null)
+                CameraShakeEvent.RaiseEvent();
         }
     }
 
