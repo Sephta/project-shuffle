@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 83956b6c2a723454883b7404d6e883d4, type: 3}
-  m_Name: ProjectileTestA
+  m_Name: ProjectileTestB
   m_EditorClassIdentifier: 
-  projSprite: {fileID: 8500842441331114980, guid: 3b05625fa4ca665418233bbc5216c5dd,
+  projSprite: {fileID: -1996727710444730709, guid: 3b05625fa4ca665418233bbc5216c5dd,
     type: 3}
   _behaviorType: 0
-  speed: 54.3
-  projDamage: 50
-  projLifetime: 3
+  speed: 100
+  projDamage: 35
+  projLifetime: 2
   colliderOffset: {x: 0.03, y: 0}
   colliderSize: {x: 0.2, y: 0.2}

@@ -52,8 +52,6 @@ public class ItemDropHandler : MonoBehaviour
     void Start()
     {
         cardType = cardData.CardType;
-
-        Debug.Log(gameObject.name + " has InstanceId: " + gameObject.GetInstanceID());
     }
 
     // void Update() {}
@@ -81,7 +79,6 @@ public class ItemDropHandler : MonoBehaviour
     /// </summary>
     private void DestroyEntity(int idToCheck)
     {
-        Debug.Log("IDToCheck = " + idToCheck + ", and " + gameObject.name + " has ID: " + gameObject.GetInstanceID());
         if (idToCheck == gameObject.GetInstanceID())
         {
             if (grantPlayerCardEvent != null)

@@ -147,9 +147,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 375c3cb2d15b52046abf0d4d64eea47a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UpdateProjectileData: {fileID: 11400000, guid: cb195948c8c16df48aa0f23d97ef33ee,
+    type: 2}
   _projData: {fileID: 11400000, guid: b7bf714db7f41484683120b069931481, type: 2}
-  _rb: {fileID: 0}
+  _rb: {fileID: 1329111819759016292}
   _col: {fileID: 1329111819759016293}
+  _sr: {fileID: 1329111819759016295}
   speed: 0
   lifeTime: 0
+  active: 0
   currLifetime: 0

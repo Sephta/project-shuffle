@@ -4996,13 +4996,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 1329111819759016298, guid: c112392f8f5c5da439f674efb004482f, type: 3}
-  Notification: 3
+  Notification: 4
   Strategy: 0
   Preload: 100
   Capacity: 1000
   Recycle: 0
   Persist: 0
-  Stamp: 0
+  Stamp: 1
   Warnings: 1
   spawnedClonesList: []
   despawnedClones:
@@ -9434,9 +9434,26 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 536875922912018617, guid: 1b1af3460d2f2f746b59bacc9264c816,
         type: 3}
+      propertyPath: _projParentObject
+      value: 
+      objectReference: {fileID: 1426412027}
+    - target: {fileID: 536875922912018617, guid: 1b1af3460d2f2f746b59bacc9264c816,
+        type: 3}
+      propertyPath: _projComponentRefr
+      value: 
+      objectReference: {fileID: 382509723767993187, guid: c112392f8f5c5da439f674efb004482f,
+        type: 3}
+    - target: {fileID: 536875922912018617, guid: 1b1af3460d2f2f746b59bacc9264c816,
+        type: 3}
       propertyPath: UpdatePlayerVisuals
       value: 
       objectReference: {fileID: 11400000, guid: 01ec9916e179df04b9164bf4f750b996,
+        type: 2}
+    - target: {fileID: 536875922912018617, guid: 1b1af3460d2f2f746b59bacc9264c816,
+        type: 3}
+      propertyPath: UpdateProjectileData
+      value: 
+      objectReference: {fileID: 11400000, guid: cb195948c8c16df48aa0f23d97ef33ee,
         type: 2}
     - target: {fileID: 536875922912018620, guid: 1b1af3460d2f2f746b59bacc9264c816,
         type: 3}
