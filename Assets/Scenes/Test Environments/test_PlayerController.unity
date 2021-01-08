@@ -9625,7 +9625,17 @@ PrefabInstance:
     - target: {fileID: 4733965541795119358, guid: cc2cc09d80575ab4f8ea7fad21a46623,
         type: 3}
       propertyPath: cameraDist
-      value: 2.5
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4733965541795119358, guid: cc2cc09d80575ab4f8ea7fad21a46623,
+        type: 3}
+      propertyPath: ShowDebugData
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4733965541795119358, guid: cc2cc09d80575ab4f8ea7fad21a46623,
+        type: 3}
+      propertyPath: normalizeMousePosData
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4733965541795119359, guid: cc2cc09d80575ab4f8ea7fad21a46623,
         type: 3}

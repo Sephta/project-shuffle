@@ -5,6 +5,18 @@ using MilkShake;
 
 public class CameraController : MonoBehaviour
 {
+    // EVENT CHANNELS
+    [Foldout("Event Channels")] public VoidEventChannelSO CameraShakeEvent;
+
+#region Debug Data
+#if UNITY_EDITOR
+    private bool ShowDebugData = false;
+#endif
+    [SerializeField, ReadOnly, ShowIf("ShowDebugData")] private Vector2 mousePos = Vector2.zero;
+    [SerializeField, ReadOnly, ShowIf("ShowDebugData")] private Vector3 targetPos = Vector3.zero;
+    [SerializeField, ReadOnly, ShowIf("ShowDebugData")] private Vector3 refVel = Vector3.zero;
+#endregion
+
     [Header("Dependencies")]
     [Required] public Transform player = null;
     [Required] public GameObject cam = null;
@@ -13,21 +25,17 @@ public class CameraController : MonoBehaviour
 
     [Header("Camera Configurable Data")]
     
-    [SerializeField, Tooltip("How far away it should be when the mouse is at the edge of the screen.")]
+    [SerializeField, Range(0f, 5f), Tooltip("How far away it should be when the mouse is at the edge of the screen.")]
     private float cameraDist = 0f;
     
     [SerializeField]
     private float smoothTime = 0.2f;
     
-    [SerializeField] private float zStart = 0f;
+    [SerializeField]
+    private float zStart = 0f;
 
-    [SerializeField, ReadOnly] private Vector2 mousePos = Vector2.zero;
-    [SerializeField, ReadOnly] private Vector3 targetPos = Vector3.zero;
-    [SerializeField, ReadOnly] private Vector3 refVel = Vector3.zero;
-
-
-    [Header("Event Channels")]
-    public VoidEventChannelSO CameraShakeEvent;
+    [SerializeField, Tooltip("Determins whether or not the mouse positional data is normalized.")]
+    private bool normalizeMousePosData = false;
 
 
 #region Unity Functions
@@ -97,10 +105,13 @@ public class CameraController : MonoBehaviour
         result -= Vector2.one;
 
         // Distance remains consistant around the edges of the screen
-        float max = 0.9f;
-        if (Mathf.Abs(result.x) > max || Mathf.Abs(result.y) > max)
+        if (normalizeMousePosData)
         {
-            result = result.normalized;
+            float max = 0.9f;
+            if (Mathf.Abs(result.x) > max || Mathf.Abs(result.y) > max)
+            {
+                result = result.normalized;
+            }
         }
 
         return result;
@@ -113,6 +124,12 @@ public class CameraController : MonoBehaviour
                                       zStart);
 
         return result;
+    }
+
+    [Button("Press to show Debug Data")]
+    private void ToggleDebugData()
+    {
+        ShowDebugData = !ShowDebugData;
     }
 #endregion
 }

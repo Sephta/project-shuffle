@@ -50,6 +50,7 @@ MonoBehaviour:
   cameraDist: 1
   smoothTime: 0.2
   zStart: -10
+  normalizeMousePosData: 1
   mousePos: {x: 0, y: 0}
   targetPos: {x: 0, y: 0, z: 0}
   refVel: {x: 0, y: 0, z: 0}
