@@ -22,3 +22,5 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   PlayerVisuals: {fileID: 11400000, guid: 01ec9916e179df04b9164bf4f750b996, type: 2}
+  UICurrentCardChange: {fileID: 11400000, guid: 52ebdb64bd5de14428b93efe62b30dbd,
+    type: 2}

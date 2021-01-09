@@ -15,7 +15,7 @@ public class HandSO : ScriptableObject
     [SerializeField] private List<CardSO> _cards = new List<CardSO>();
 
     [Foldout("Event Channels")] public VoidEventChannelSO PlayerVisuals;
-    // [Foldout("Event Channels")] public CardEventChannelSO 
+    [Foldout("Event Channels")] public IntEventChannelSO UICurrentCardChange;
 
     public List<CardSO> Cards => _cards;
     public int MaxSize => _maxSize;
@@ -72,6 +72,8 @@ public class HandSO : ScriptableObject
         // Update the player visuals to reflect equipment changes
         if (PlayerVisuals != null)
             PlayerVisuals.RaiseEvent();
+        if (UICurrentCardChange != null)
+            UICurrentCardChange.RaiseEvent(_selectedIndex);
     }
     // --------------------------------------------------------------------------------------------
 
@@ -84,6 +86,8 @@ public class HandSO : ScriptableObject
         // Update the player visuals to reflect equipment changes
         if (PlayerVisuals != null)
             PlayerVisuals.RaiseEvent();
+        if (UICurrentCardChange != null)
+            UICurrentCardChange.RaiseEvent(_selectedIndex);
     }
 
     public void PrevCard()
@@ -94,6 +98,8 @@ public class HandSO : ScriptableObject
         // Update the player visuals to reflect equipment changes
         if (PlayerVisuals != null)
             PlayerVisuals.RaiseEvent();
+        if (UICurrentCardChange != null)
+            UICurrentCardChange.RaiseEvent(_selectedIndex);
     }
 
     public void SetCurrentSelect(CardSO newSelection)
@@ -104,6 +110,8 @@ public class HandSO : ScriptableObject
         // Update the player visuals to reflect equipment changes
         if (PlayerVisuals != null)
             PlayerVisuals.RaiseEvent();
+        if (UICurrentCardChange != null)
+            UICurrentCardChange.RaiseEvent(_selectedIndex);
     }
     // --------------------------------------------------------------------------------------------
 

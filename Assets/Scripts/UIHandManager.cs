@@ -12,6 +12,7 @@ public class UIHandManager : MonoBehaviour
     // EVENT CHANNELS
     [Foldout("Event Channels")] public CardEventChannelSO CardDataPassthrough;
     [Foldout("Event Channels")] public CardIntEventChannelSO UpdateCardDataEvent;
+    [Foldout("Event Channels")] public IntEventChannelSO UpdateCurrentlySelected;
 #endregion
 
 
@@ -23,8 +24,11 @@ public class UIHandManager : MonoBehaviour
     [Header("Configurable Data")]
     public GameObject _currentlySelected = null;
     [SerializeField] private GameObject _previouslySelected = null;
+    public int _currIndex = 0;
+    [SerializeField] private int _prevIndex = -1;
     [SerializeField] private List<GameObject> _cards = new List<GameObject>();
     [SerializeField, Range(0f, 180f), OnValueChanged("UpdateCardLayout")] private float cardRotationMax = 0f;
+    [SerializeField, Range(0f, 2f), OnValueChanged("UpdateCardLayout")] private float cardRotationMagnitude = 0f;
     [SerializeField, Range(0f, 100f), OnValueChanged("UpdateCardLayout")] private float cardHeightMax = 0f;
     [SerializeField, Range(0f, 2f), OnValueChanged("UpdateCardLayout")] private float cardOffsetFactor = 0f;
 
@@ -42,6 +46,10 @@ public class UIHandManager : MonoBehaviour
         {
             CardDataPassthrough.OnEventRaised += AddCardToHand;
         }
+        if (UpdateCurrentlySelected != null)
+        {
+            UpdateCurrentlySelected.OnEventRaised += UpdateCurrSelectedPos;
+        }
     }
 
     void OnDisable()
@@ -49,6 +57,10 @@ public class UIHandManager : MonoBehaviour
         if (CardDataPassthrough != null)
         {
             CardDataPassthrough.OnEventRaised -= AddCardToHand;
+        }
+        if (UpdateCurrentlySelected != null)
+        {
+            UpdateCurrentlySelected.OnEventRaised -= UpdateCurrSelectedPos;
         }
     }
 
@@ -83,7 +95,15 @@ public class UIHandManager : MonoBehaviour
 
         // Add new card to "hand" list
         _cards.Add(refr);
+        
+        // Update cache of currenly/previously selected cards
+        _previouslySelected = _currentlySelected;
+        _prevIndex = _currIndex;
+        
+        _currentlySelected = refr;
+        _currIndex = _cards.IndexOf(refr);
 
+        // Update the layout
         UpdateCardLayout();
     }
 
@@ -94,42 +114,38 @@ public class UIHandManager : MonoBehaviour
         if (_cards.Count <= 0)
             return;
 
-        // for (int i = 0; i < _cards.Count; i++)
-        // {
-        //     RectTransform cardTransform = _cards[i].GetComponent<RectTransform>();
-
-        //     float dx = 0f, dy = 0f, dz_rotation = 0f;
-
-        //     if (i < (_cards.Count / 2))  // left half of list
-        //     {
-        //         dx = -((cardTransform.rect.width * uiCanvas.scaleFactor) * cardOffsetFactor * ((_cards.Count / 2) - (i%(_cards.Count / 2))));
-        //         dz_rotation = (cardRotationMax / _cards.Count);
-        //     }
-
-        //     else if (i > (_cards.Count / 2))  // right half of list
-        //     {
-        //         dx = ((cardTransform.rect.width * uiCanvas.scaleFactor) * cardOffsetFactor * ((_cards.Count / 2) - (i%(_cards.Count / 2))));
-        //         dz_rotation = -(cardRotationMax / _cards.Count);
-        //     }
-
-        //     if (_cards.Count%2 == 0 && i >= (_cards.Count / 2))
-        //     {
-        //         dx = ((cardTransform.rect.width * uiCanvas.scaleFactor) * cardOffsetFactor * ((_cards.Count / 2) - (i%(_cards.Count / 2))));
-        //         dz_rotation = -(cardRotationMax / _cards.Count);
-        //     }
-
-        //     cardTransform.localPosition = new Vector3(dx,
-        //                                          dy,
-        //                                          0f);
-            
-        //     cardTransform.localEulerAngles = new Vector3(0f, 0f, dz_rotation);
-        // }
-
-
         // If there are an even number of cards
         if (_cards.Count%2 == 0)
         {
+            int centerIndex = (_cards.Count / 2);
 
+            for (int i = 0; i < _cards.Count; i++)
+            {
+                RectTransform cardTransform = _cards[i].GetComponent<RectTransform>();
+                float dx = 0f, dy = 0f, dz_rotation = 0f;
+
+                // Left side of hand
+                if (i < centerIndex)
+                {
+                    dx = -((cardTransform.rect.width * uiCanvas.scaleFactor) * cardOffsetFactor * Mathf.Abs(centerIndex - i));
+                    dy = -(((cardTransform.rect.width * uiCanvas.scaleFactor) / 4) * (cardHeightMax / _cards.Count) * Mathf.Abs(centerIndex - i));
+                    dz_rotation = (Mathf.Abs(centerIndex - i) + (cardRotationMax / _cards.Count)) * cardRotationMagnitude;
+                }
+
+                // Right side of hand
+                else if (i >= centerIndex)
+                {
+                    dx = ((cardTransform.rect.width * uiCanvas.scaleFactor) * cardOffsetFactor * Mathf.Abs(centerIndex - i));
+                    dy = -(((cardTransform.rect.width * uiCanvas.scaleFactor) / 4) * (cardHeightMax / _cards.Count) * (Mathf.Abs(centerIndex - i) + 1));
+                    dz_rotation = -(Mathf.Abs(centerIndex - i) + (cardRotationMax / _cards.Count)) * cardRotationMagnitude;
+                }
+
+                cardTransform.localPosition = new Vector3(dx,
+                                                 dy,
+                                                 0f);
+            
+                cardTransform.localEulerAngles = new Vector3(0f, 0f, dz_rotation);
+            }
         }
         else // there are an odd number of cards
         {
@@ -144,20 +160,16 @@ public class UIHandManager : MonoBehaviour
                 if (i < centerIndex)
                 {
                     dx = -((cardTransform.rect.width * uiCanvas.scaleFactor) * cardOffsetFactor * Mathf.Abs(centerIndex - i));
-                    dz_rotation = (cardRotationMax / _cards.Count);
+                    dy = -(((cardTransform.rect.width * uiCanvas.scaleFactor) / 4) * (cardHeightMax / _cards.Count) * Mathf.Abs(centerIndex - i));
+                    dz_rotation = (Mathf.Abs(centerIndex - i) + (cardRotationMax / _cards.Count)) * cardRotationMagnitude;
                 }
 
                 // Right side of hand
                 else if (i > centerIndex)
                 {
                     dx = ((cardTransform.rect.width * uiCanvas.scaleFactor) * cardOffsetFactor * Mathf.Abs(centerIndex - i));
-                    dz_rotation = -(cardRotationMax / _cards.Count);
-                }
-
-                // Center card of hand
-                else
-                {
-
+                    dy = -(((cardTransform.rect.width * uiCanvas.scaleFactor) / 4) * (cardHeightMax / _cards.Count) * Mathf.Abs(centerIndex - i));
+                    dz_rotation = -(Mathf.Abs(centerIndex - i) + (cardRotationMax / _cards.Count)) * cardRotationMagnitude;
                 }
 
                 cardTransform.localPosition = new Vector3(dx,
@@ -168,11 +180,29 @@ public class UIHandManager : MonoBehaviour
             }
         }
 
-        // _currentlySelected.transform.localPosition = new Vector3(_currentlySelected.transform.localPosition.x,
-        //                                                         112f,
-        //                                                         _currentlySelected.transform.localPosition.z);
-        // _currentlySelected.transform.SetSiblingIndex(_cards.Count - 1);
+        _currentlySelected.transform.localPosition = new Vector3(_currentlySelected.transform.localPosition.x,
+                                                                _currentlySelected.transform.localPosition.y + 112f,
+                                                                _currentlySelected.transform.localPosition.z);
+        _currentlySelected.transform.SetSiblingIndex(_cards.Count - 1);
         // _currentlySelected.transform.localEulerAngles = Vector3.zero;
+        // _currentlySelected.transform.SetSiblingIndex(0);
+    }
+
+    private void UpdateCurrSelectedPos(int newCurr)
+    {
+        if (newCurr < 0 || _cards.Count <= newCurr)
+            return;
+        
+        if (newCurr != _currIndex)
+        {
+            _previouslySelected = _cards[_currIndex];
+            _prevIndex = _currIndex;
+
+            _currentlySelected = _cards[newCurr];
+            _currIndex = newCurr;
+
+            UpdateCardLayout();
+        }
     }
 
 #endregion
