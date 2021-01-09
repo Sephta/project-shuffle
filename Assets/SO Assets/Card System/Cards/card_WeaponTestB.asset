@@ -22,3 +22,4 @@ MonoBehaviour:
   _knockBackX: {x: -0.2524655, y: 0.2524655}
   _knockBackY: {x: -1, y: 0}
   _knockbackEvent: {fileID: 11400000, guid: 95ca2ce4c10aec14aa5afd2a65614189, type: 2}
+  _camShakePreset: {fileID: 11400000, guid: c8d85c6f5486df64f9492e07ed5b88a0, type: 2}

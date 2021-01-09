@@ -9,13 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 955f6c9be248dc249a31bad716cc6963, type: 3}
-  m_Name: CamShakeTestA
+  m_Script: {fileID: 11500000, guid: dec20757f7186d5448e2cc57baef1fab, type: 3}
+  m_Name: ui_UpdateCardDataEvent
   m_EditorClassIdentifier: 
-  shakeType: 0
-  strength: 4
-  roughness: 0.125
-  fadeIn: 0.1
-  fadeOut: 0.1
-  positionInfluence: {x: 0, y: 1, z: 0}
-  rotationInfluence: {x: 0, y: 0, z: 0.25}
+  debugLogWhenEventRaised: 0

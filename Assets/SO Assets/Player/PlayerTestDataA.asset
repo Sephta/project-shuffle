@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: PlayerTestDataA
   m_EditorClassIdentifier: 
   moveSpeed: 75
-  colliderRadius: 0.25
+  colliderRadius: 0.35
   colliderPos: {x: -0.03, y: 0.05}

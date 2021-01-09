@@ -11,6 +11,8 @@ public class InitManager : MonoBehaviour
 #if UNITY_EDITOR
     [Header("Scene Data")]
     [Scene] public string sceneNameToLoad = "";
+	[Scene] public string testAdditiveLoad = "";
+
 
     void Awake()
     {
@@ -23,6 +25,7 @@ public class InitManager : MonoBehaviour
 			}
 		}
 		SceneManager.LoadSceneAsync(sceneNameToLoad, LoadSceneMode.Additive);
+		SceneManager.LoadSceneAsync(testAdditiveLoad, LoadSceneMode.Additive);
     }
 #endif
 }

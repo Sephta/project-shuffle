@@ -18,11 +18,11 @@ public class PlayerController : MonoBehaviour
 #region Event Channels
     // EVENT CHANNELS
     [Foldout("Event Channels")] public VoidEventChannelSO KnockbackEvent;
-    [Foldout("Event Channels")] public CardSOEvent RecieveCardEvent;
     [Foldout("Event Channels")] public VoidEventChannelSO EquipEvent;
     [Foldout("Event Channels")] public VoidEventChannelSO UpdatePlayerVisuals;
+    [Foldout("Event Channels")] public ShakePresetEventChannelSO CameraShakeEvent;
     [Foldout("Event Channels")] public IntEventChannelSO UpdateProjectileData;
-    [Foldout("Event Channels")] public VoidEventChannelSO CameraShakeEvent;
+    [Foldout("Event Channels")] public CardEventChannelSO RecieveCardEvent;
 #endregion
 
     [Header("Dependencies")]
@@ -96,10 +96,6 @@ public class PlayerController : MonoBehaviour
         {
             UpdatePlayerVisuals.OnEventRaised += RefreshEquipmentVisuals;
         }
-        if (UpdateProjectileData != null)
-        {
-            // UpdateProjectileData.OnEventRaised += ;
-        }
     }
     
     void OnDisable()
@@ -120,10 +116,6 @@ public class PlayerController : MonoBehaviour
         {
             UpdatePlayerVisuals.OnEventRaised -= RefreshEquipmentVisuals;
         }
-        if (UpdateProjectileData != null)
-        {
-            // UpdateProjectileData.OnEventRaised -= ;
-        }
 
         pHand.ResetHand();
     }
@@ -132,18 +124,21 @@ public class PlayerController : MonoBehaviour
     {
         if (pHand != null)
             pHand.InitHand();
+        else
+            Debug.LogError("ERROR! Player hand is null.");
 
         EquipEvent.RaiseEvent();
     }
 
     void Update()
     {
-        CheckDebugFlags();
         CheckPlayerActions();
 
         downTime = (Time.time - timeSinceLastAttack);
 
 #if UNITY_EDITOR
+        CheckDebugFlags();
+
         if (pHand != null)
             _currEquip = pHand.CurrentlySelected;
 #endif
@@ -160,15 +155,25 @@ public class PlayerController : MonoBehaviour
     /* ---------------- Public --------------- */
     /* --------------------------------------- */
 
+    /// <summary> Only used for shooting weapon cards. </summary>
     public void FireProjectile()
     {
         // Cant shoot if player not holding a gun
         if (pHand.CurrentlySelected == null)
             return;
+        
+        // If currently selected card is not of type "weapon" don't do anything
+        if (pHand.CurrentlySelected.CardType != ItemType.weapon)
+            return;
 
         // Type conversion to WeaponCardSO since not all cards can shoot...
         WeaponCardSO weaponCardRefr = pHand.CurrentlySelected as WeaponCardSO;
 
+        /*
+         * Might modify how projectile timing works. This currently allows for "full auto" weapon types
+         * without instantiating like hundreds of projectiles in a fraction of a second since this function
+         * could theoretically be called every single frame
+        */
         if ((Time.time - timeSinceLastAttack) >= weaponCardRefr.ROF)
         {
             // Cache time last fired weapon
@@ -187,7 +192,7 @@ public class PlayerController : MonoBehaviour
             if (KnockbackEvent != null)
                 KnockbackEvent.RaiseEvent();
             if (CameraShakeEvent != null)
-                CameraShakeEvent.RaiseEvent();
+                CameraShakeEvent.RaiseEvent(weaponCardRefr._camShakePreset);
         }
     }
 
@@ -199,15 +204,24 @@ public class PlayerController : MonoBehaviour
             return;
 #endif
 
+        // If currently selected item is null, dont do anything
         if (pHand.CurrentlySelected == null)
             return;
+
+        // Knockback currently is only applied from using weapon cards. (subject to change)
+        if (pHand.CurrentlySelected.CardType != ItemType.weapon)
+            return;
         
-        WeaponCardSO weapon = (pHand.CurrentlySelected.CardType == ItemType.weapon) ? pHand.CurrentlySelected as WeaponCardSO : null;
+        // Type cast so I can extract the Knockback data from the weapon
+        WeaponCardSO weapon = pHand.CurrentlySelected as WeaponCardSO;
+        
+        // Direction the knockback should be applied (should be opposite of direction projectile was fired)
+        Vector3 dir = -(_projSpawnLocation.transform.position - transform.position);
 
-        Vector3 dir = _projSpawnLocation.transform.position - transform.position;
-
+        // I don't think I need to check if null anymore but its here just in case.
+        // Also, knockback is just an impulse force applied to player's rigidbody2d
         if (weapon != null)
-            _rb.AddForce(weapon.KnockBackMagnitude * -dir.normalized * Time.fixedDeltaTime, ForceMode2D.Impulse);
+            _rb.AddForce(weapon.KnockBackMagnitude * dir.normalized * Time.fixedDeltaTime, ForceMode2D.Impulse);
     }
 
     public void AddCardToHand(CardSO card)
@@ -272,30 +286,6 @@ public class PlayerController : MonoBehaviour
         direction = direction.normalized;
     }
 
-    private void CheckDebugFlags()
-    {
-        if (changeColliderData)
-            UpdateColliderData();
-    }
-
-#if UNITY_EDITOR
-    /// <summary>
-    /// Used in the editor to update player collider data in Inspector durring runtime.
-    /// </summary>
-    private void UpdateColliderData()
-    {
-        if (_col == null)
-            return;
-        
-        CircleCollider2D col = _col as CircleCollider2D;
-
-        Vector2 newColOffset = new Vector2(pData.ColliderPosition.x, pData.ColliderPosition.y);
-
-        col.radius = pData.ColliderRadius;
-        col.offset = newColOffset;
-    }
-#endif
-
     private void CheckPlayerActions()
     {
         if (InputManager._inst == null)
@@ -358,5 +348,32 @@ public class PlayerController : MonoBehaviour
         // Otherwise show whats in the players equiped slot
         _equipedVisuals.sprite = pHand.CurrentlySelected.CardSprite;
     }
+
+#endregion
+
+#region Editor Only
+#if UNITY_EDITOR
+    private void CheckDebugFlags()
+    {
+        if (changeColliderData)
+            UpdateColliderData();
+    }
+
+    /// <summary>
+    /// Used in the editor to update player collider data in Inspector durring runtime.
+    /// </summary>
+    private void UpdateColliderData()
+    {
+        if (_col == null)
+            return;
+        
+        CircleCollider2D col = _col as CircleCollider2D;
+
+        Vector2 newColOffset = new Vector2(pData.ColliderPosition.x, pData.ColliderPosition.y);
+
+        col.radius = pData.ColliderRadius;
+        col.offset = newColOffset;
+    }
+#endif
 #endregion
 }

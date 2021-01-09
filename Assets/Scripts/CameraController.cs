@@ -6,7 +6,7 @@ using MilkShake;
 public class CameraController : MonoBehaviour
 {
     // EVENT CHANNELS
-    [Foldout("Event Channels")] public VoidEventChannelSO CameraShakeEvent;
+    [Foldout("Event Channels")] public ShakePresetEventChannelSO CameraShakeEvent;
 
 #region Debug Data
 #if UNITY_EDITOR
@@ -20,7 +20,6 @@ public class CameraController : MonoBehaviour
     [Header("Dependencies")]
     [Required] public Transform player = null;
     [Required] public GameObject cam = null;
-    public ShakePreset milkShakePreset = null;
 
 
     [Header("Camera Configurable Data")]
@@ -54,7 +53,6 @@ public class CameraController : MonoBehaviour
 
         if (player != null)
             transform.position = player.position;
-        Debug.Log("ZSTART: " + zStart);
     }
 
     void OnEnable()
@@ -82,10 +80,10 @@ public class CameraController : MonoBehaviour
 #endregion
 
 #region Class Methods
-    private void ShakeCamera()
+    private void ShakeCamera(ShakePreset sPreset)
     {
-        if (milkShakePreset != null)
-            Shaker.ShakeAll(milkShakePreset);
+        if (sPreset != null)
+            Shaker.ShakeAll(sPreset);
     }
     
     private void UpdateCamPos()

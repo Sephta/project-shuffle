@@ -13,7 +13,7 @@ public class ItemDropHandler : MonoBehaviour
 
     [Header("Item Events")]
     [Required] public IntEventChannelSO pickupEvent;
-    [Required] public CardSOEvent grantPlayerCardEvent;
+    [Required] public CardEventChannelSO grantPlayerCardEvent;
 
     [Header("Debug Data")]
     [ReadOnly] public ItemType cardType;

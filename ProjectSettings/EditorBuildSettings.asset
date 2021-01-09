@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Test Environments/test_PlayerController.unity
     guid: 4c182cbc16eb8f34d8a860ae51086fdf
+  - enabled: 1
+    path: Assets/Scenes/UI.unity
+    guid: 5e670f2f8d567a04090c73f958e56bfd
   m_configObjects: {}

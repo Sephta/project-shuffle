@@ -1,7 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using NaughtyAttributes;
+using MilkShake;
 
 
 [CreateAssetMenu(fileName = "CardData", menuName = "ScriptableObjects/CardSystem/Cards/WeaponCard", order = 1)]
@@ -21,6 +20,7 @@ public class WeaponCardSO : CardSO
     [SerializeField, MinMaxSlider(-1f, 1f)] private Vector2 _knockBackY = Vector2.zero;
     
     public VoidEventChannelSO _knockbackEvent;
+    [Expandable] public ShakePreset _camShakePreset;
 
     public GameObject ProjectilePrefab => _projPrefab;
     public ProjectileData ProjectileData => _projData;

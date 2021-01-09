@@ -7867,36 +7867,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 767511352}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1823412782
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1823412783}
-  m_Layer: 0
-  m_Name: ============ UI ============
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1823412783
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1823412782}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 10
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1825222902 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1329111819759016298, guid: c112392f8f5c5da439f674efb004482f,
@@ -9331,7 +9301,13 @@ PrefabInstance:
         type: 3}
       propertyPath: CameraShakeEvent
       value: 
-      objectReference: {fileID: 11400000, guid: b53ce0b881210014aacdf4998cb7faf6,
+      objectReference: {fileID: 11400000, guid: 14724eb029f028647af5560a9818ea3f,
+        type: 2}
+    - target: {fileID: 536875922912018617, guid: 1b1af3460d2f2f746b59bacc9264c816,
+        type: 3}
+      propertyPath: RecieveCardEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: 7f743744a2d899f47a08304b40d5b441,
         type: 2}
     - target: {fileID: 536875922912018617, guid: 1b1af3460d2f2f746b59bacc9264c816,
         type: 3}
@@ -9344,6 +9320,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 382509723767993187, guid: c112392f8f5c5da439f674efb004482f,
         type: 3}
+    - target: {fileID: 536875922912018617, guid: 1b1af3460d2f2f746b59bacc9264c816,
+        type: 3}
+      propertyPath: changeColliderData
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 536875922912018617, guid: 1b1af3460d2f2f746b59bacc9264c816,
         type: 3}
       propertyPath: UpdatePlayerVisuals
@@ -9642,6 +9623,12 @@ PrefabInstance:
       propertyPath: ShowDebugData
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4733965541795119358, guid: cc2cc09d80575ab4f8ea7fad21a46623,
+        type: 3}
+      propertyPath: CameraShakeEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: 14724eb029f028647af5560a9818ea3f,
+        type: 2}
     - target: {fileID: 4733965541795119358, guid: cc2cc09d80575ab4f8ea7fad21a46623,
         type: 3}
       propertyPath: normalizeMousePosData
