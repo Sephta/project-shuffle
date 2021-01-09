@@ -15,6 +15,7 @@ public class HandSO : ScriptableObject
     [SerializeField] private List<CardSO> _cards = new List<CardSO>();
 
     [Foldout("Event Channels")] public VoidEventChannelSO PlayerVisuals;
+    // [Foldout("Event Channels")] public CardEventChannelSO 
 
     public List<CardSO> Cards => _cards;
     public int MaxSize => _maxSize;

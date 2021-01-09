@@ -40,7 +40,12 @@ public class UICardManager : MonoBehaviour
         }
     }
 
-    // void Start() {}
+    void Start()
+    {
+        if (_cardData != null)
+            UpdateCardData(_cardData, gameObject.GetInstanceID());
+    }
+
     // void Update() {}
     // void FixedUpdate() {}
 #endregion
