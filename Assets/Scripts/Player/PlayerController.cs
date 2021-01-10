@@ -231,7 +231,7 @@ public class PlayerController : MonoBehaviour
             if (pHand.Cards[i] == null)
             {
                 pHand.Cards[i] = card;
-                pHand.SetCurrentSelect(pHand.Cards[i]);
+                pHand.SetCurrentSelect(pHand.Cards[i], i);
                 EquipEvent.RaiseEvent();
                 break;
             }

@@ -102,10 +102,10 @@ public class HandSO : ScriptableObject
             UICurrentCardChange.RaiseEvent(_selectedIndex);
     }
 
-    public void SetCurrentSelect(CardSO newSelection)
+    public void SetCurrentSelect(CardSO newSelection, int newIndex)
     {
         _selected = newSelection;
-        _selectedIndex = _cards.IndexOf(newSelection);
+        _selectedIndex = newIndex;
 
         // Update the player visuals to reflect equipment changes
         if (PlayerVisuals != null)
