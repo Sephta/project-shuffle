@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbb29d63e27bc5144a4b4a863ef5abbb, type: 3}
+  m_Name: card_WeaponTestC
+  m_EditorClassIdentifier: 
+  _type: 0
+  _sprite: {fileID: -8999723266941487365, guid: 2c2b2045213a63b4f83f00bcfc5f8d29,
+    type: 3}
+  _projPrefab: {fileID: 1329111819759016298, guid: c112392f8f5c5da439f674efb004482f,
+    type: 3}
+  _projData: {fileID: 11400000, guid: d1a24774059cda242bc81a7ad7e6659f, type: 2}
+  _rof: 0.087
+  _knockBackMagnitude: 100
+  _knockBackX: {x: -0.25, y: 0.25}
+  _knockBackY: {x: -1, y: 0}
+  _knockbackEvent: {fileID: 11400000, guid: 95ca2ce4c10aec14aa5afd2a65614189, type: 2}
+  _camShakePreset: {fileID: 11400000, guid: 984361a551a9cf24f9d5add97771e075, type: 2}
