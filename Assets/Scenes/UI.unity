@@ -313,7 +313,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 380848559, guid: ddc6acc6156770f4696da1f94d7c4db0, type: 3}
       propertyPath: cardOffsetFactor
-      value: 1.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 380848559, guid: ddc6acc6156770f4696da1f94d7c4db0, type: 3}
       propertyPath: _cards.Array.size

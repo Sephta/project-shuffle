@@ -219,19 +219,27 @@ MonoBehaviour:
   _col: {fileID: 536875922912018619}
   _anim: {fileID: 536875922904622766}
   KnockbackEvent: {fileID: 11400000, guid: 95ca2ce4c10aec14aa5afd2a65614189, type: 2}
-  RecieveCardEvent: {fileID: 11400000, guid: 7f743744a2d899f47a08304b40d5b441, type: 2}
   EquipEvent: {fileID: 11400000, guid: 2e57da8dd9d7e9f4e87b9e7779d74afc, type: 2}
+  UpdatePlayerVisuals: {fileID: 11400000, guid: 01ec9916e179df04b9164bf4f750b996,
+    type: 2}
+  CameraShakeEvent: {fileID: 11400000, guid: 14724eb029f028647af5560a9818ea3f, type: 2}
+  UpdateProjectileData: {fileID: 11400000, guid: cb195948c8c16df48aa0f23d97ef33ee,
+    type: 2}
+  RecieveCardEvent: {fileID: 11400000, guid: 7f743744a2d899f47a08304b40d5b441, type: 2}
   _proj: {fileID: 1329111819759016298, guid: c112392f8f5c5da439f674efb004482f, type: 3}
+  _projComponentRefr: {fileID: 382509723767993187, guid: c112392f8f5c5da439f674efb004482f,
+    type: 3}
   _projParentObject: {fileID: 0}
   _equipmentSlot: {fileID: 536875924169197652}
   _projSpawnLocation: {fileID: 536875922201866005}
   pData: {fileID: 11400000, guid: d497a0d6a29ba6341bf4349d7b771a4b, type: 2}
   pHand: {fileID: 11400000, guid: aa6b6f4b8004ea84cae2395ba5a13fa7, type: 2}
-  ShowDebugData: 1
+  ShowDebugData: 0
+  _currEquip: {fileID: 0}
   changeColliderData: 0
+  applyWeaponKnockback: 1
   _equipedVisuals: {fileID: 0}
   direction: {x: 0, y: 0}
-  _currEquip: {fileID: 0}
   attackDownTime: 0.06
   downTime: 0
   timeSinceLastAttack: 0
@@ -260,7 +268,6 @@ GameObject:
   m_Component:
   - component: {fileID: 536875923368185044}
   - component: {fileID: 536875923368185045}
-  - component: {fileID: 536875923368185042}
   - component: {fileID: 365072102}
   m_Layer: 0
   m_Name: Player Visuals
@@ -277,7 +284,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 536875923368185047}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 536875922904622769}
@@ -322,7 +329,8 @@ SpriteRenderer:
   m_SortingLayerID: -253921873
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: c8042c3e0f1113940a86d97f531e6b70, type: 3}
+  m_Sprite: {fileID: -6847685952126229437, guid: 75127faeb38898049a1ebc56a5647b83,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -333,20 +341,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &536875923368185042
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 536875923368185047}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e5e490cbd1d7c0a4fb1a77d44df1979a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  toFollow: {fileID: 536875922912018621}
-  followSpeed: 0
 --- !u!114 &365072102
 MonoBehaviour:
   m_ObjectHideFlags: 0
