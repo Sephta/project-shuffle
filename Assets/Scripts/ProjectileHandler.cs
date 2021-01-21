@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using Lean.Pool;
 using NaughtyAttributes;
 
@@ -17,6 +18,8 @@ public class ProjectileHandler : MonoBehaviour, IPoolable
     public SpriteRenderer _sr = null;
 
     [Header("Simulated Data")]
+    [SerializeField] private LayerMask layersToDetect = 0;
+    [SerializeField, Tag] private List<string> tags = new List<string>();
     [ReadOnly] public float speed = 0f;
     [ReadOnly] public float lifeTime = 0f;
 
@@ -74,6 +77,17 @@ public class ProjectileHandler : MonoBehaviour, IPoolable
             case ProjectileBehavior.straight:
                 MovementBehavior_straight();
                 break;
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D collider)
+    {
+        for (int i = 0; i < tags.Count; i++)
+        {
+            if (collider.tag == tags[i])
+            {
+                DestroyProjectile();
+            }
         }
     }
 #endregion
@@ -173,7 +187,13 @@ public class ProjectileHandler : MonoBehaviour, IPoolable
         currLifetime = Mathf.Clamp(currLifetime, 0, lifeTime);
 
         if (currLifetime <= 0)
-            LeanPool.Despawn(this.gameObject, 0f);
+            DestroyProjectile();
+            
+    }
+
+    private void DestroyProjectile()
+    {
+        LeanPool.Despawn(this.gameObject, 0f);
     }
 #endregion
 }

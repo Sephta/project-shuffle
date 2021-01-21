@@ -153,6 +153,12 @@ MonoBehaviour:
   _rb: {fileID: 1329111819759016292}
   _col: {fileID: 1329111819759016293}
   _sr: {fileID: 1329111819759016295}
+  layersToDetect:
+    serializedVersion: 2
+    m_Bits: 1792
+  tags:
+  - Static Collidable
+  - Entity
   speed: 0
   lifeTime: 0
   active: 0
